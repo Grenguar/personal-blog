@@ -1,3 +1,10 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENVIRONMENT}`,
+})
+
+const spaceId = process.env.CONTENTFUL_SPACE_ID
+const accessToken = process.env.CONTENTFUL_CONTENT_DELIVERY
+
 module.exports = {
   siteMetadata: {
     title: `My Personal Blog`,
@@ -57,8 +64,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Igor Soroka Personal Blog`,
+        short_name: `Igor Soroka Blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -74,5 +81,13 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    {
+      resolve: "gatsby-source-contentful",
+      options: {
+        spaceId,
+        accessToken,
+      },
+    },
+    `gatsby-plugin-netlify`,
   ],
 }
